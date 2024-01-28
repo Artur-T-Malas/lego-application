@@ -18,6 +18,5 @@ public class LegoSetDto {
     private int number;
     private String name;
     private int numberOfPieces;
-    private List<Minifig> minifigs;
     private Long categoryId;
 }

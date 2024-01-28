@@ -28,14 +28,12 @@ class LegoSetServiceTest {
                 111,
                 "SetOne",
                 101,
-                List.of(),
                 1L
         );
         LegoSet set2 = new LegoSet(
                 222,
                 "SetTwo",
                 202,
-                List.of(),
                 2L
         );
 
@@ -43,14 +41,12 @@ class LegoSetServiceTest {
                 111,
                 "SetOne",
                 101,
-                List.of(),
                 1L
         );
         LegoSetDto setDto2 = new LegoSetDto(
                 222,
                 "SetTwo",
                 202,
-                List.of(),
                 2L
         );
 

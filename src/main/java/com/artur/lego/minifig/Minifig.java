@@ -1,20 +1,26 @@
 package com.artur.lego.minifig;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Minifig {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "orders_generator", sequenceName = "orders_seq", allocationSize = 1)
     private Long id;
 
     private String name;
 
-    private int numberOfPieces;
+    private Integer numberOfPieces;
+
+    public Minifig(String name, Integer numberOfPieces) {
+        this.name = name;
+        this.numberOfPieces = numberOfPieces;
+    }
 }
