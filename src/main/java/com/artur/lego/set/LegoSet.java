@@ -26,4 +26,11 @@ public class LegoSet {
     @ManyToOne()
     private Category category;
 
+    public LegoSet(int number, String name, int numberOfPieces, List<Minifig> minifigs, Category category) {
+        this.number = number;
+        this.name = name;
+        this.numberOfPieces = numberOfPieces;
+        this.minifigs = minifigs;
+        this.category = category;
+    }
 }
