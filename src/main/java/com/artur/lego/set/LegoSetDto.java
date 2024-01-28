@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 @RequiredArgsConstructor
-@NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class LegoSetDto {
@@ -20,7 +19,5 @@ public class LegoSetDto {
     private String name;
     private int numberOfPieces;
     private List<Minifig> minifigs;
-
-    @ManyToOne()
-    private Category category;
+    private Long categoryId;
 }

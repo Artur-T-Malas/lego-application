@@ -11,8 +11,12 @@ public class LegoSetService {
 
     private final LegoSetRepository legoSetRepository;
 
-    List<LegoSet> getAllLegoSets() {
-        return legoSetRepository.findAll();
+    List<LegoSetDto> getAllLegoSets() {
+        return legoSetRepository
+                .findAll()
+                .stream()
+                .map(LegoSetMapper::mapDaoToDto)
+                .toList();
     }
 
 }

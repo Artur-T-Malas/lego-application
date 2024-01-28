@@ -22,15 +22,13 @@ public class LegoSet {
     private String name;
     private int numberOfPieces;
     private List<Minifig> minifigs;
+    private Long categoryId;
 
-    @ManyToOne()
-    private Category category;
-
-    public LegoSet(int number, String name, int numberOfPieces, List<Minifig> minifigs, Category category) {
+    public LegoSet(int number, String name, int numberOfPieces, List<Minifig> minifigs, Long categoryId) {
         this.number = number;
         this.name = name;
         this.numberOfPieces = numberOfPieces;
         this.minifigs = minifigs;
-        this.category = category;
+        this.categoryId = categoryId;
     }
 }

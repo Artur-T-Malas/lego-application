@@ -8,7 +8,7 @@ public class LegoSetMapper {
                 legoSet.getName(),
                 legoSet.getNumberOfPieces(),
                 legoSet.getMinifigs(),
-                legoSet.getCategory()
+                legoSet.getCategoryId()
         );
     }
 
