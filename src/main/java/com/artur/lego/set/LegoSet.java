@@ -31,4 +31,21 @@ public class LegoSet {
         this.numberOfPieces = numberOfPieces;
         this.categoryId = categoryId;
     }
+
+    public LegoSet(int number, String name) {
+        this.number = number;
+        this.name = name;
+    }
+
+    public LegoSet(int number, String name, int numberOfPieces) {
+        this.number = number;
+        this.name = name;
+        this.numberOfPieces = numberOfPieces;
+    }
+
+    public LegoSet(int number, String name, Long categoryId) {
+        this.number = number;
+        this.name = name;
+        this.categoryId = categoryId;
+    }
 }
