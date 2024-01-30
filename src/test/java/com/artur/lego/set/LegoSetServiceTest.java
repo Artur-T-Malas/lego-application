@@ -9,8 +9,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
 class LegoSetServiceTest {
@@ -66,13 +68,13 @@ class LegoSetServiceTest {
     @Test
     public void shouldReturnSetByNumber() {
         //        given
-        LegoSet set1 = new LegoSet(
-                111,
-                "SetOne",
-                101,
-                1L
+        LegoSet set = new LegoSet(
+                222,
+                "SetTwo",
+                202,
+                2L
         );
-        LegoSet set2 = new LegoSet(
+        LegoSetDto setDto = new LegoSetDto(
                 222,
                 "SetTwo",
                 202,
@@ -80,9 +82,19 @@ class LegoSetServiceTest {
         );
 
 //        when
-        Mockito.when(legoSetRepository.findByNumber(222)).thenReturn(set2);
+        Mockito.when(legoSetRepository.findByNumber(222)).thenReturn(Optional.of(set));
 
 //        then
-        assertEquals(set2, legoSetService.getSetByNumber(222));
+        assertEquals(setDto, legoSetService.getSetByNumber(222));
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenNoSetFoundWithNumber() {
+//        when
+        Mockito.when(legoSetRepository.findByNumber(any(Integer.class))).thenThrow(new LegoSetNotFoundException("message"));
+
+//        then
+        assertThrows(LegoSetNotFoundException.class,
+                () -> legoSetService.getSetByNumber(any(Integer.class)));
     }
 }

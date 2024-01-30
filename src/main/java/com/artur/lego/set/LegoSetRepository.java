@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -15,8 +16,12 @@ public class LegoSetRepository {
         return iLegoSetRepository.findAll();
     }
 
-    LegoSet findByNumber(int number) {
+    Optional<LegoSet> findByNumber(int number) {
         return iLegoSetRepository.findByNumber(number);
+    }
+
+    void save(LegoSet legoSet) {
+        iLegoSetRepository.save(legoSet);
     }
 
 }
