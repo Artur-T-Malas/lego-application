@@ -11,4 +11,12 @@ public class LegoSetMapper {
         );
     }
 
+    public static LegoSet mapDtoToDao(LegoSetDto legoSetDto) {
+        return new LegoSet(
+                legoSetDto.getNumber(),
+                legoSetDto.getName(),
+                legoSetDto.getNumberOfPieces(),
+                legoSetDto.getCategoryId()
+        );
+    }
 }

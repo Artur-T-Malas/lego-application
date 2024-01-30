@@ -35,4 +35,8 @@ public class LegoSetService {
         legoSetRepository.save(legoSet);
     }
 
+    public void addLegoSetDto(LegoSetDto legoSetDto) {
+        legoSetRepository.save(LegoSetMapper.mapDtoToDao(legoSetDto));
+    }
+
 }
