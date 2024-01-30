@@ -19,4 +19,7 @@ public class LegoSetService {
                 .toList();
     }
 
+    public LegoSet getSetByNumber(int number) {
+        return legoSetRepository.findByNumber(number);
+    }
 }

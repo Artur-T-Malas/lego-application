@@ -1,5 +1,6 @@
 package com.artur.lego.set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,6 +20,11 @@ class LegoSetServiceTest {
 
     @InjectMocks
     LegoSetService legoSetService;
+
+    @BeforeEach
+    void prepareLegoSetsData() {
+
+    }
 
     @Test
     public void shouldReturnListOfLegoSetDto() {
@@ -55,5 +61,28 @@ class LegoSetServiceTest {
 
 //        then
         assertEquals(List.of(setDto1, setDto2), legoSetService.getAllLegoSets());
+    }
+
+    @Test
+    public void shouldReturnSetByNumber() {
+        //        given
+        LegoSet set1 = new LegoSet(
+                111,
+                "SetOne",
+                101,
+                1L
+        );
+        LegoSet set2 = new LegoSet(
+                222,
+                "SetTwo",
+                202,
+                2L
+        );
+
+//        when
+        Mockito.when(legoSetRepository.findByNumber(222)).thenReturn(set2);
+
+//        then
+        assertEquals(set2, legoSetService.getSetByNumber(222));
     }
 }

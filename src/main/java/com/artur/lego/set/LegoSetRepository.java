@@ -15,4 +15,8 @@ public class LegoSetRepository {
         return iLegoSetRepository.findAll();
     }
 
+    LegoSet findByNumber(int number) {
+        return iLegoSetRepository.findByNumber(number);
+    }
+
 }
