@@ -1,6 +1,7 @@
 package com.artur.lego.set;
 
 import jakarta.persistence.GeneratedValue;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class LegoSetRestController {
     }
 
     @PostMapping
-    void addLegoSet(@RequestBody LegoSetDto legoSetDto) {
+    void addLegoSet(@RequestBody @Valid LegoSetDto legoSetDto) {
         legoSetService.addLegoSetDto(legoSetDto);
     }
 
