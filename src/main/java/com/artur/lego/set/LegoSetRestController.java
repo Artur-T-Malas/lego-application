@@ -2,6 +2,7 @@ package com.artur.lego.set;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +25,9 @@ public class LegoSetRestController {
     }
 
     @PostMapping
-    void addLegoSet(@RequestBody @Valid LegoSetDto legoSetDto) {
+    ResponseEntity<String> addLegoSet (@RequestBody @Valid LegoSetDto legoSetDto) {
         legoSetService.addLegoSetDto(legoSetDto);
+        return ResponseEntity.ok("Data is valid");
     }
 
 }
