@@ -4,7 +4,7 @@ public class LegoSetMapper {
 
     public static LegoSetDto mapDaoToDto(LegoSet legoSet) {
         return new LegoSetDto(
-                legoSet.getNumber(),
+                String.valueOf(legoSet.getNumber()),
                 legoSet.getName(),
                 legoSet.getNumberOfPieces(),
                 legoSet.getCategoryId()
@@ -13,7 +13,7 @@ public class LegoSetMapper {
 
     public static LegoSet mapDtoToDao(LegoSetDto legoSetDto) {
         return new LegoSet(
-                legoSetDto.getNumber(),
+                Integer.parseInt(legoSetDto.getNumber()),
                 legoSetDto.getName(),
                 legoSetDto.getNumberOfPieces(),
                 legoSetDto.getCategoryId()

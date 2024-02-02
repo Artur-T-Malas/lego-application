@@ -46,13 +46,13 @@ class LegoSetServiceTest {
         );
 
         LegoSetDto setDto1 = new LegoSetDto(
-                111,
+                "111",
                 "SetOne",
                 101,
                 1L
         );
         LegoSetDto setDto2 = new LegoSetDto(
-                222,
+                "222",
                 "SetTwo",
                 202,
                 2L
@@ -75,7 +75,7 @@ class LegoSetServiceTest {
                 2L
         );
         LegoSetDto setDto = new LegoSetDto(
-                222,
+                "222",
                 "SetTwo",
                 202,
                 2L
