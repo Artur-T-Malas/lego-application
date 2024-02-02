@@ -23,10 +23,6 @@ class LegoSetServiceTest {
     @InjectMocks
     LegoSetService legoSetService;
 
-    @BeforeEach
-    void prepareLegoSetsData() {
-
-    }
 
     @Test
     public void shouldReturnListOfLegoSetDto() {

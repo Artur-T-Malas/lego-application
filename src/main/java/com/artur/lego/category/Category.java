@@ -20,7 +20,7 @@ public class Category {
 
     private String name;
 
-    public Category(String name, Set<LegoSet> legoSets) {
+    public Category(String name) {
         this.name = name;
     }
 }
