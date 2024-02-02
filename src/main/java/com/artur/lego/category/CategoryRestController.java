@@ -1,10 +1,9 @@
 package com.artur.lego.category;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +22,12 @@ public class CategoryRestController {
     @GetMapping("/{id}")
     Category getCategoryById(@PathVariable Long id) {
         return categoryService.getCategoryById(id);
+    }
+
+    @PostMapping
+    ResponseEntity<String> addCategory(@RequestBody @Valid CategoryDto categoryDto) {
+        categoryService.addCategory(categoryDto);
+        return ResponseEntity.ok("Data is valid");
     }
 
 }

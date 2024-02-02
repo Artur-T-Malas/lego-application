@@ -19,11 +19,20 @@ public class CategoryService {
         return categoryRepository.findById(id).get();
     }
 
-    public List<Category> getAllCategories() {
+    List<Category> getAllCategories() {
         if (categoryRepository.findAll().isEmpty()) {
             throw new CategoryNotFoundException("No categories found");
         }
 
         return categoryRepository.findAll();
     }
+
+    void addCategory(CategoryDto categoryDto) {
+        categoryRepository.save(
+                new Category(
+                        categoryDto.getName()
+                )
+        );
+    }
+
 }

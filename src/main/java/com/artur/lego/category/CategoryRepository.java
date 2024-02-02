@@ -19,4 +19,8 @@ public class CategoryRepository {
     List<Category> findAll() {
         return iCategoryRepository.findAll();
     }
+
+    void save(Category category) {
+        iCategoryRepository.save(category);
+    }
 }
