@@ -22,6 +22,7 @@ public class Category {
 
     @NotBlank(message = "Category name can't be blank")
     @Pattern(regexp = "[a-zA-Z ]+", message = "Category name must be only letters")
+    @Column(unique = true)
     private String name;
 
     public Category(String name) {

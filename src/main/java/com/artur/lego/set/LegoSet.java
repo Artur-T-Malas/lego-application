@@ -19,7 +19,9 @@ public class LegoSet {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true)
     private int number;
+
     private String name;
     private int numberOfPieces;
 
