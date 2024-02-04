@@ -21,14 +21,7 @@ public class LegoSetService {
     }
 
     LegoSetDto getSetByNumber(int number) {
-
-        Optional<LegoSet> foundSet = legoSetRepository.findByNumber(number);
-
-        if (foundSet.isEmpty()) {
-            throw new LegoSetNotFoundException("There is no set with number " + number);
-        }
-
-        return LegoSetMapper.mapDaoToDto(foundSet.get());
+        return LegoSetMapper.mapDaoToDto(returnSetIfExists(number));
     }
 
     public void addLegoSet(LegoSet legoSet) {
@@ -39,4 +32,34 @@ public class LegoSetService {
         legoSetRepository.save(LegoSetMapper.mapDtoToDao(legoSetDto));
     }
 
+    public void updateLegoSet(int number, LegoSetDto legoSetDto) {
+
+        legoSetRepository.save(new LegoSet(
+                getSetIdFromNumber(number),
+                Integer.parseInt(legoSetDto.getNumber()), // new set number
+                legoSetDto.getName(),
+                legoSetDto.getNumberOfPieces(),
+                legoSetDto.getCategoryId()
+        ));
+    }
+
+    LegoSet returnSetIfExists (int number) {
+        Optional<LegoSet> foundSet = legoSetRepository.findByNumber(number);
+
+        if (foundSet.isEmpty()) {
+            throw new LegoSetNotFoundException("There is no set with number " + number);
+        }
+
+        return foundSet.get();
+    }
+
+    Long getCorrespondingIdFromDto (LegoSetDto legoSetDto) {
+
+        return returnSetIfExists(Integer.parseInt(legoSetDto.getNumber())).getId();
+
+    }
+
+    Long getSetIdFromNumber (int number) {
+        return returnSetIfExists(number).getId();
+    }
 }

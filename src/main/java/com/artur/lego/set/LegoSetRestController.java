@@ -30,4 +30,10 @@ public class LegoSetRestController {
         return ResponseEntity.ok("Data is valid");
     }
 
+    @PutMapping("/{number}")
+    ResponseEntity<String> updateLegoSet(@PathVariable int number, @RequestBody @Valid LegoSetDto legoSetDto) {
+        legoSetService.updateLegoSet(number, legoSetDto);
+        return ResponseEntity.ok("Update successful");
+    }
+
 }

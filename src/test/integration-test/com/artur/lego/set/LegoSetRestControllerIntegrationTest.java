@@ -3,29 +3,24 @@ package com.artur.lego.set;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.nio.charset.Charset;
-import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @Slf4j
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class LegoSetRestControllerIntegrationTest {
 
-    @MockBean
-    private LegoSetRepository legoSetRepository;
 
     @Autowired
     LegoSetRestController legoSetRestController;
@@ -64,16 +59,10 @@ public class LegoSetRestControllerIntegrationTest {
                 );
 
 //        when
-        Mockito.when(legoSetRepository.findByNumber(999999999)).thenReturn(Optional.of(new LegoSet(
-                Integer.parseInt(legoSetDto.getNumber()),
-                legoSetDto.getName(),
-                legoSetDto.getNumberOfPieces()
-        )));
-//        then
-        System.out.println("-------------------------------");
 
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/api/lego-sets/999999999"))
+                //        then
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers
                         .status().isOk()
@@ -120,6 +109,63 @@ public class LegoSetRestControllerIntegrationTest {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content()
                         .contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    public void shouldUpdateExistingLegoSet() throws Exception {
+//        given
+        LegoSet legoSet = new LegoSet(
+                1000L,
+                1000,
+                "Set",
+                1000,
+                null
+                );
+
+        LegoSet updatedLegoSet = new LegoSet( // expected result
+                1000L,
+                999,
+                "Updated Set",
+                999,
+                null
+        );
+
+        LegoSetDto updatingLegoSetDto = new LegoSetDto( // DTO to be sent to PUT method
+                "999",
+                "Updated Set",
+                999
+        );
+
+        LegoSetDto updatedLegoSetDto = updatingLegoSetDto;
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        legoSetService.addLegoSet(legoSet);
+
+//        when
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .put("/api/lego-sets/" + legoSet.getNumber())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(updatingLegoSetDto)))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+//        then
+//        check that API returns the updated DTO
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/api/lego-sets/" + updatedLegoSet.getNumber()))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers
+                        .status().isOk())
+                .andExpect(MockMvcResultMatchers
+                        .content().string(objectMapper.writeValueAsString(updatedLegoSetDto)));
+
+//        and check that there is nothing at the "old" number
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/api/lego-sets/" + legoSet.getNumber()))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers
+                        .status().isNotFound());
     }
 
 }
