@@ -1,5 +1,6 @@
 package com.artur.lego.set;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 
 @ExtendWith(MockitoExtension.class)
 class LegoSetServiceTest {
@@ -92,5 +94,18 @@ class LegoSetServiceTest {
 //        then
         assertThrows(LegoSetNotFoundException.class,
                 () -> legoSetService.getSetByNumber(any(Integer.class)));
+    }
+
+    @Test
+    public void shouldCallRepositorySaveWhenAddLegoSet() {
+//        given
+        LegoSet legoSet = new LegoSet(
+                1,
+                any()
+        );
+//        when
+        legoSetService.addLegoSet(legoSet);
+//        then
+        Mockito.verify(legoSetRepository, Mockito.times(1)).save(legoSet);
     }
 }

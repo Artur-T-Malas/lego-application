@@ -24,4 +24,8 @@ public class LegoSetRepository {
         iLegoSetRepository.save(legoSet);
     }
 
+    void deleteById(Long id) {
+        iLegoSetRepository.deleteById(id);
+    }
+
 }

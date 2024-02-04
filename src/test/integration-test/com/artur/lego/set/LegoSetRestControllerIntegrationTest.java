@@ -2,6 +2,7 @@ package com.artur.lego.set;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -70,6 +71,9 @@ public class LegoSetRestControllerIntegrationTest {
                 .andExpect(MockMvcResultMatchers
                         .content().json(objectMapper.writeValueAsString(legoSetDto))
                 );
+
+//        after, clean database from what was added
+        legoSetService.deleteLegoSet(Integer.parseInt(legoSetDto.getNumber()));
     }
 
     @Test
@@ -91,7 +95,11 @@ public class LegoSetRestControllerIntegrationTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content()
                         .contentType(textPlainUtf8));
+
+//        after, clean the database from what was added
+        legoSetService.deleteLegoSet(10101);
     }
+
 
     @Test
     public void whenPostRequestToLegoSetAndInvalidLegoSet_thenCorrectResponse() throws Exception {
@@ -163,6 +171,49 @@ public class LegoSetRestControllerIntegrationTest {
 //        and check that there is nothing at the "old" number
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/api/lego-sets/" + legoSet.getNumber()))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers
+                        .status().isNotFound());
+
+//        after, clean the database from was added
+        legoSetService.deleteLegoSet(updatedLegoSet.getNumber());
+    }
+
+    @Test
+    public void shouldDeleteLegoSet() throws Exception {
+//        given
+        LegoSetDto legoSetDto = new LegoSetDto(
+                "1000",
+                "Set",
+                1000,
+                null
+        );
+
+        legoSetService.addLegoSetDto(legoSetDto);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+//        check if the set was added succesfully
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/api/lego-sets/" + legoSetDto.getNumber()))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers
+                        .status().isOk())
+                .andExpect(MockMvcResultMatchers
+                        .content().string(objectMapper.writeValueAsString(legoSetDto)));
+
+//        when
+//        send a DELETE request
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/api/lego-sets/" + legoSetDto.getNumber()))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers
+                        .status().isOk());
+
+//        then
+//        check if the set can be no longer found
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/api/lego-sets/" + legoSetDto.getNumber()))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers
                         .status().isNotFound());

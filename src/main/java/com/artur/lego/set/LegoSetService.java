@@ -43,6 +43,10 @@ public class LegoSetService {
         ));
     }
 
+    public void deleteLegoSet(int number) {
+        legoSetRepository.deleteById(getSetIdFromNumber(number));
+    }
+
     LegoSet returnSetIfExists (int number) {
         Optional<LegoSet> foundSet = legoSetRepository.findByNumber(number);
 
@@ -62,4 +66,6 @@ public class LegoSetService {
     Long getSetIdFromNumber (int number) {
         return returnSetIfExists(number).getId();
     }
+
+
 }

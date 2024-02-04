@@ -36,4 +36,10 @@ public class LegoSetRestController {
         return ResponseEntity.ok("Update successful");
     }
 
+    @DeleteMapping("/{number}")
+    ResponseEntity<String> deleteLegoSet(@PathVariable int number) {
+        legoSetService.deleteLegoSet(number);
+        return ResponseEntity.ok("Lego set with number " + number + " deleted succesfully");
+    }
+
 }
