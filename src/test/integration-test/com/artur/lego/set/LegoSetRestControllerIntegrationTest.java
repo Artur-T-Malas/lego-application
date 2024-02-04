@@ -72,17 +72,14 @@ public class LegoSetRestControllerIntegrationTest {
 //        then
         System.out.println("-------------------------------");
 
-        /*
-        TODO
-            Add an assertion to check that the returned by GET legoSetDto
-            is the same one as we "sent" in the POST method.
-         */
-
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/api/lego-sets/999999999"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers
                         .status().isOk()
+                )
+                .andExpect(MockMvcResultMatchers
+                        .content().json(objectMapper.writeValueAsString(legoSetDto))
                 );
     }
 
