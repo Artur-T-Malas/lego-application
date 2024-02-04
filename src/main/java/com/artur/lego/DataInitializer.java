@@ -3,12 +3,15 @@ package com.artur.lego;
 import com.artur.lego.set.LegoSet;
 import com.artur.lego.set.LegoSetService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class DataInitializer {
 
     private final LegoSetService legoSetService;
@@ -16,7 +19,13 @@ public class DataInitializer {
     @EventListener(ApplicationReadyEvent.class)
     public void initializeData() {
 
-        initializeLegoSets();
+        try {
+            initializeLegoSets();
+        } catch (DataIntegrityViolationException exception) {
+            log.info("Data already present. Data initialization aborted. Error message below:");
+            log.info(exception.getMessage());
+        }
+
 
     }
 
