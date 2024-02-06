@@ -57,7 +57,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(PersonNotFoundException.class)
-    String personNotFoundExceptionHander(PersonNotFoundException exception) {
+    String personNotFoundExceptionHandler(PersonNotFoundException exception) {
         return exception.getMessage();
     }
 
