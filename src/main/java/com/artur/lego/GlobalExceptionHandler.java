@@ -1,6 +1,7 @@
 package com.artur.lego;
 
 import com.artur.lego.category.CategoryNotFoundException;
+import com.artur.lego.person.PersonNotFoundException;
 import com.artur.lego.set.LegoSetNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -50,6 +51,13 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(CategoryNotFoundException.class)
     String categoryNotFoundExceptionHandler(CategoryNotFoundException exception) {
+        return exception.getMessage();
+    }
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(PersonNotFoundException.class)
+    String personNotFoundExceptionHander(PersonNotFoundException exception) {
         return exception.getMessage();
     }
 
