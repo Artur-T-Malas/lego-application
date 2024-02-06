@@ -17,6 +17,7 @@ public class PersonService {
         List<PersonDto> allPeople = new ArrayList<>();
         for (Person person : personRepository.findAll()) {
             allPeople.add(PersonMapper.mapDaoToDto(person));
+            System.out.println(person.toString());
         }
         return allPeople;
     }
