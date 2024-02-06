@@ -30,4 +30,19 @@ public class PersonService {
         return PersonMapper.mapDaoToDto(person.get());
     }
 
+    void addPerson(PersonDto personDto) {
+        personRepository.save(PersonMapper.mapDtoToDao(personDto));
+    }
+
+    void deletePerson(Long id) {
+        if (!personExists(id)) {
+            throw new PersonNotFoundException("You can't delete a non-existing person");
+        }
+        personRepository.delete(id);
+    }
+
+    boolean personExists(Long id) {
+        return personRepository.findById(id).isPresent();
+    }
+
 }

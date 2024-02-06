@@ -1,10 +1,9 @@
 package com.artur.lego.person;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +22,18 @@ public class PersonRestController {
     @GetMapping("/{id}")
     PersonDto getPersonById(@PathVariable Long id) {
         return personService.getPersonById(id);
+    }
+
+    @PostMapping
+    ResponseEntity<String> addPerson(@RequestBody @Valid PersonDto personDto) {
+        personService.addPerson(personDto);
+        return ResponseEntity.ok("Person added succesfully");
+    }
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<String> deletePerson(@PathVariable Long id) {
+        personService.deletePerson(id);
+        return ResponseEntity.ok("Person deleted succesfully");
     }
 
 }

@@ -25,4 +25,12 @@ public class Person {
     private String firstName;
     private String lastName;
     private String phoneNumber;
+
+    public Person(String nickname, String email, String firstName, String lastName, String phoneNumber) {
+        this.nickname = nickname;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+    }
 }

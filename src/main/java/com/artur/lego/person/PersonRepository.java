@@ -20,4 +20,12 @@ public class PersonRepository {
         return iPersonRepository.findById(id);
     }
 
+    public void save(Person person) {
+        iPersonRepository.save(person);
+    }
+
+    public void delete(Long id) {
+        iPersonRepository.deleteById(id);
+    }
+
 }
