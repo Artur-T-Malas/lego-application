@@ -65,28 +65,34 @@ public class DataInitializer {
                 "Bouqet of Roses",
                 822
         );
+        LegoSet set3 = new LegoSet(
+                75354,
+                "Coruscant Guard Gunship",
+                1083,
+                categoryService.getCategoryByName("Star Wars")
+        );
         LegoSet testSet1 = new LegoSet(
                 1,
                 "Test Set 1",
-                1
+                1,
+                categoryService.getCategoryByName("Test")
         );
 
         legoSetService.addLegoSet(set1);
         legoSetService.addLegoSet(set2);
+        legoSetService.addLegoSet(set3);
         legoSetService.addLegoSet(testSet1);
 
     }
 
     private void initializeCategories() {
-        CategoryDto city = new CategoryDto(
-                "City"
-        );
-        CategoryDto starWars = new CategoryDto(
-                "Star Wars"
-        );
+        CategoryDto city = new CategoryDto("City");
+        CategoryDto starWars = new CategoryDto("Star Wars");
+        CategoryDto test = new CategoryDto("Test");
 
         categoryService.addCategory(city);
         categoryService.addCategory(starWars);
+        categoryService.addCategory(test);
 
     }
 
