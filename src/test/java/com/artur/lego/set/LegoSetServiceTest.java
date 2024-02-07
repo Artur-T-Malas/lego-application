@@ -34,26 +34,27 @@ class LegoSetServiceTest {
                 111,
                 "SetOne",
                 101,
-                1L
+                null
+
         );
         LegoSet set2 = new LegoSet(
                 222,
                 "SetTwo",
                 202,
-                2L
+                null
         );
 
         LegoSetDto setDto1 = new LegoSetDto(
                 "111",
                 "SetOne",
                 101,
-                1L
+                null
         );
         LegoSetDto setDto2 = new LegoSetDto(
                 "222",
                 "SetTwo",
                 202,
-                2L
+                null
         );
 
 //        when
@@ -70,13 +71,13 @@ class LegoSetServiceTest {
                 222,
                 "SetTwo",
                 202,
-                2L
+                null
         );
         LegoSetDto setDto = new LegoSetDto(
                 "222",
                 "SetTwo",
                 202,
-                2L
+                null
         );
 
 //        when

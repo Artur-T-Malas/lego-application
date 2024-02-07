@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -28,4 +29,5 @@ public class Category {
     public Category(String name) {
         this.name = name;
     }
+
 }

@@ -19,6 +19,14 @@ public class CategoryService {
         return categoryRepository.findById(id).get();
     }
 
+    public Category getCategoryByName(String name) {
+        if (categoryRepository.findByName(name).isEmpty()) {
+            throw new CategoryNotFoundException("There is no category with name " + name);
+        }
+
+        return categoryRepository.findByName(name).get();
+    }
+
     List<Category> getAllCategories() {
         if (categoryRepository.findAll().isEmpty()) {
             throw new CategoryNotFoundException("No categories found");
@@ -27,7 +35,7 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    void addCategory(CategoryDto categoryDto) {
+    public void addCategory(CategoryDto categoryDto) {
         categoryRepository.save(
                 new Category(
                         categoryDto.getName()

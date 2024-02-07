@@ -16,6 +16,10 @@ public class CategoryRepository {
         return iCategoryRepository.findById(id);
     }
 
+    Optional<Category> findByName(String name) {
+        return iCategoryRepository.findByName(name);
+    }
+
     List<Category> findAll() {
         return iCategoryRepository.findAll();
     }

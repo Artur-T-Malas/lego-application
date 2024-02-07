@@ -1,5 +1,6 @@
 package com.artur.lego.set;
 
+import com.artur.lego.category.Category;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ public class LegoSetDto {
     private String name;
 
     private int numberOfPieces;
-    private Long categoryId;
+    private Category category;
     private int releaseYear;
 
     public LegoSetDto(String number, String name) {
@@ -34,16 +35,16 @@ public class LegoSetDto {
         this.numberOfPieces = numberOfPieces;
     }
 
-    public LegoSetDto(String number, String name, Long categoryId) {
+    public LegoSetDto(String number, String name, Category category) {
         this.number = number;
         this.name = name;
-        this.categoryId = categoryId;
+        this.category = category;
     }
 
-    public LegoSetDto(String number, String name, int numberOfPieces, Long categoryId) {
+    public LegoSetDto(String number, String name, int numberOfPieces, Category category) {
         this.number = number;
         this.name = name;
         this.numberOfPieces = numberOfPieces;
-        this.categoryId = categoryId;
+        this.category = category;
     }
 }

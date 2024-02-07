@@ -25,22 +25,24 @@ public class LegoSet {
     private String name;
     private int numberOfPieces;
 
-    private Long categoryId;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     private int releaseYear;
 
-    public LegoSet(int number, String name, int numberOfPieces,Long categoryId) {
+    public LegoSet(int number, String name, int numberOfPieces,Category category) {
         this.number = number;
         this.name = name;
         this.numberOfPieces = numberOfPieces;
-        this.categoryId = categoryId;
+        this.category = category;
     }
 
-    public LegoSet(int number, String name, int numberOfPieces, Long categoryId, int releaseYear) {
+    public LegoSet(int number, String name, int numberOfPieces, Category category, int releaseYear) {
         this.number = number;
         this.name = name;
         this.numberOfPieces = numberOfPieces;
-        this.categoryId = categoryId;
+        this.category= category;
         this.releaseYear = releaseYear;
     }
 
@@ -55,9 +57,9 @@ public class LegoSet {
         this.numberOfPieces = numberOfPieces;
     }
 
-    public LegoSet(int number, String name, Long categoryId) {
+    public LegoSet(int number, String name, Category category) {
         this.number = number;
         this.name = name;
-        this.categoryId = categoryId;
+        this.category = category;
     }
 }

@@ -1,5 +1,8 @@
 package com.artur.lego;
 
+import com.artur.lego.category.Category;
+import com.artur.lego.category.CategoryDto;
+import com.artur.lego.category.CategoryService;
 import com.artur.lego.person.Person;
 import com.artur.lego.person.PersonRepository;
 import com.artur.lego.set.LegoSet;
@@ -18,9 +21,17 @@ public class DataInitializer {
 
     private final LegoSetService legoSetService;
     private final PersonRepository personRepository;
+    private final CategoryService categoryService;
 
     @EventListener(ApplicationReadyEvent.class)
     public void initializeData() {
+
+        try {
+            initializeCategories();
+        } catch (DataIntegrityViolationException exception) {
+            log.info("Data already present. Data initialization aborted. Error message below:");
+            log.info(exception.getMessage());
+        }
 
         try {
             initializeLegoSets();
@@ -45,7 +56,9 @@ public class DataInitializer {
         LegoSet set1 = new LegoSet(
                 75372,
                 "Clone Trooper & Battle Droid Battle Pack",
-                215
+                215,
+                categoryService.getCategoryByName("Star Wars")
+
         );
         LegoSet set2 = new LegoSet(
                 10328,
@@ -61,6 +74,19 @@ public class DataInitializer {
         legoSetService.addLegoSet(set1);
         legoSetService.addLegoSet(set2);
         legoSetService.addLegoSet(testSet1);
+
+    }
+
+    private void initializeCategories() {
+        CategoryDto city = new CategoryDto(
+                "City"
+        );
+        CategoryDto starWars = new CategoryDto(
+                "Star Wars"
+        );
+
+        categoryService.addCategory(city);
+        categoryService.addCategory(starWars);
 
     }
 

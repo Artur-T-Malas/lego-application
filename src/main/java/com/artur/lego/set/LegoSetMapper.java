@@ -7,7 +7,7 @@ public class LegoSetMapper {
                 String.valueOf(legoSet.getNumber()),
                 legoSet.getName(),
                 legoSet.getNumberOfPieces(),
-                legoSet.getCategoryId(),
+                legoSet.getCategory(),
                 legoSet.getReleaseYear()
         );
     }
@@ -17,7 +17,7 @@ public class LegoSetMapper {
                 Integer.parseInt(legoSetDto.getNumber()),
                 legoSetDto.getName(),
                 legoSetDto.getNumberOfPieces(),
-                legoSetDto.getCategoryId(),
+                legoSetDto.getCategory(),
                 legoSetDto.getReleaseYear()
         );
     }
