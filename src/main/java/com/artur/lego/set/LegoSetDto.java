@@ -21,6 +21,7 @@ public class LegoSetDto {
 
     private int numberOfPieces;
     private Long categoryId;
+    private int releaseYear;
 
     public LegoSetDto(String number, String name) {
         this.number = number;
@@ -36,6 +37,13 @@ public class LegoSetDto {
     public LegoSetDto(String number, String name, Long categoryId) {
         this.number = number;
         this.name = name;
+        this.categoryId = categoryId;
+    }
+
+    public LegoSetDto(String number, String name, int numberOfPieces, Long categoryId) {
+        this.number = number;
+        this.name = name;
+        this.numberOfPieces = numberOfPieces;
         this.categoryId = categoryId;
     }
 }

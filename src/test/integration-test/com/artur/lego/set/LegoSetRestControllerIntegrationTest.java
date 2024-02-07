@@ -127,7 +127,8 @@ public class LegoSetRestControllerIntegrationTest {
                 1000,
                 "Set",
                 1000,
-                null
+                null,
+                2022
                 );
 
         LegoSet updatedLegoSet = new LegoSet( // expected result
@@ -135,7 +136,8 @@ public class LegoSetRestControllerIntegrationTest {
                 999,
                 "Updated Set",
                 999,
-                null
+                null,
+                2022
         );
 
         LegoSetDto updatingLegoSetDto = new LegoSetDto( // DTO to be sent to PUT method

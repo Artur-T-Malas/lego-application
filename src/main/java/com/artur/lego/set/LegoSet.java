@@ -27,11 +27,21 @@ public class LegoSet {
 
     private Long categoryId;
 
+    private int releaseYear;
+
     public LegoSet(int number, String name, int numberOfPieces,Long categoryId) {
         this.number = number;
         this.name = name;
         this.numberOfPieces = numberOfPieces;
         this.categoryId = categoryId;
+    }
+
+    public LegoSet(int number, String name, int numberOfPieces, Long categoryId, int releaseYear) {
+        this.number = number;
+        this.name = name;
+        this.numberOfPieces = numberOfPieces;
+        this.categoryId = categoryId;
+        this.releaseYear = releaseYear;
     }
 
     public LegoSet(int number, String name) {

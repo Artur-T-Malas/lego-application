@@ -39,7 +39,8 @@ public class LegoSetService {
                 Integer.parseInt(legoSetDto.getNumber()), // new set number
                 legoSetDto.getName(),
                 legoSetDto.getNumberOfPieces(),
-                legoSetDto.getCategoryId()
+                legoSetDto.getCategoryId(),
+                legoSetDto.getReleaseYear()
         ));
     }
 
